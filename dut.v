@@ -6,6 +6,7 @@ module lfu_finder (clk,
                    buf_num_replc);
   
   parameter BUF_BIT = 2;
+  parameter FF_DLY = 1;
 
   input clk;
   input rst_n;
@@ -33,13 +34,13 @@ module lfu_finder (clk,
   
   wire max_flg;
 
-  wire [BUF_BIT-1:0] rplc_buf_req; 
+  reg [BUF_BIT-1:0] rplc_buf_req; 
   wire [BUF_BIT-1:0] rplc_buf_int;
 
 //This part calculate the access time of buffer 01
-  defparam ctnr_time_01.BUF_ADDR = 2'b00;
-  cntr_time ctnr_time_01 (.max_cntr_flg(max_flg), 
-                          .rplc_buf_req_int(rplc_buf_req),
+  defparam cntr_time_01.BUF_ADDR = 2'b00;
+  cntr_time cntr_time_01 (.max_cntr_flg(max_flg), 
+                          .rplc_buf_req_int(rplc_buf_int),
                           .ref_buf_req_int(ref_buf_req),
                           .new_buf_req_int(new_buf_req),
                           .t_in(t_in_01),
@@ -50,9 +51,9 @@ module lfu_finder (clk,
                    .out_y(t_in_01));    
   
 //This part calculate the access time of buffer 02
-  defparam ctnr_time_02.BUF_ADDR = 2'b01;
-  cntr_time ctnr_time_02 (.max_cntr_flg(max_flg), 
-                          .rplc_buf_req_int(rplc_buf_req),
+  defparam cntr_time_02.BUF_ADDR = 2'b01;
+  cntr_time cntr_time_02 (.max_cntr_flg(max_flg), 
+                          .rplc_buf_req_int(rplc_buf_int),
                           .ref_buf_req_int(ref_buf_req),
                           .new_buf_req_int(new_buf_req),
                           .t_in(t_in_02),
@@ -63,9 +64,9 @@ module lfu_finder (clk,
                    .out_y(t_in_02));
 
 //This part calculate the access time of buffer 03
-  defparam ctnr_time_03.BUF_ADDR = 2'b10;
-  cntr_time ctnr_time_03 (.max_cntr_flg(max_flg), 
-                          .rplc_buf_req_int(rplc_buf_req),
+  defparam cntr_time_03.BUF_ADDR = 2'b10;
+  cntr_time cntr_time_03 (.max_cntr_flg(max_flg), 
+                          .rplc_buf_req_int(rplc_buf_int),
                           .ref_buf_req_int(ref_buf_req),
                           .new_buf_req_int(new_buf_req),
                           .t_in(t_in_03),
@@ -76,9 +77,9 @@ module lfu_finder (clk,
                    .out_y(t_in_03));
 
 //This part calculate the access time of buffer 04
-  defparam ctnr_time_04.BUF_ADDR = 2'b11;
-  cntr_time ctnr_time_04 (.max_cntr_flg(max_flg), 
-                          .rplc_buf_req_int(rplc_buf_req),
+  defparam cntr_time_04.BUF_ADDR = 2'b11;
+  cntr_time cntr_time_04 (.max_cntr_flg(max_flg), 
+                          .rplc_buf_req_int(rplc_buf_int),
                           .ref_buf_req_int(ref_buf_req),
                           .new_buf_req_int(new_buf_req),
                           .t_in(t_in_04),
@@ -98,8 +99,17 @@ module lfu_finder (clk,
                                       .t_out_03_int(t_in_03),
                                       .t_out_04_int(t_in_04),
                                       .rplc_buf_int(rplc_buf_int));
-  ff_2bit buf_rplc_handle_ff (.in_a(rplc_buf_int),
-                              .out_y(rplc_buf_req));
+  
+  always @(posedge clk or negedge rst_n) begin
+    if (rst_n == 1'b0) begin
+      rplc_buf_req <= #FF_DLY 2'b00;
+    end
+    else begin
+      rplc_buf_req <= #FF_DLY (new_buf_req == 1'b1) 
+                              ? rplc_buf_int
+                              : rplc_buf_req;
+    end
+  end
 endmodule
 
 //----------------------------------------------------------------------------
@@ -232,13 +242,13 @@ module buf_rplc_handle (t_out_01_int,
                     ? t_out_02_int 
                     : t_out_01_int;
   assign t_cmp_34 = (t_out_03_int > t_out_04_int) 
-                    ? t_out_03_int 
-                    : t_out_04_int;
+                    ? t_out_04_int 
+                    : t_out_03_int;
   assign t_cmp = (t_cmp_12 > t_cmp_34) 
-                 ? t_cmp_12 
-                 : t_cmp_34;
+                 ? t_cmp_34 
+                 : t_cmp_12;
 
-  always @(t_cmp) begin
+  always @(t_out_01_int or t_out_02_int or t_out_03_int or t_out_04_int or t_cmp) begin
     if (t_cmp == t_out_01_int) begin
       rplc_buf_int = BUF_NUM_01;
     end
