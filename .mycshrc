@@ -1,0 +1,65 @@
+#24G xhost +
+#24G source /common/appl/Env/Synopsys/vcs-mx_vD-2009.12-4
+#24G setenv SNPSLMD_LICENSE_FILE 27000@lictrain1
+#24G setenv LM_LICENSE_FILE 27000@lictrain1
+#24G setenv LSFBS_SMALL_VCS YES
+
+echo "hello"
+#24G setenv PATH /common/appl/gcc-3.3.6/bin/:$PATH
+#source /common/lsftool/RBS/dotfiles/lsf_cshrc
+#setenv LSF_PROJECT SV
+
+#setenv PATH   /common/appl/VIM70/bin:${PATH}
+source /common/appl/Perl/perl-5.12.3
+
+set   autolist
+set   complete = igncase
+
+umask 022
+
+##################LFS##########################
+if (`hostname` =~ *lsf*) then
+    setenv LSF_BUMON 515 
+    #setenv LSF_SAKUBAN A035790 
+    setenv LSF_SAKUBAN A035770 
+#24G    source /common/lsftool/RBS/dotfiles/lsf_cshrc_cbs
+    source /common/lsftool/RBS/dotfiles/lsf_cshrc
+    setenv LSF_PROJECT SV
+    #setenv DISPLAY ${REMOTEHOST}:0.0
+    setenv DISPLAY 172.29.155.61:0.0 
+    #setenv LSFBS_SMALL_VCS YES
+    source /common/appl/Env/Synopsys/vcs-mx_vH-2013.06-4
+
+else
+    # do nothing
+    #   endif
+    #
+endif
+
+###############################################
+
+  setenv PATH /common/appl/java/jre1.6.0_13/bin:$PATH
+  #setenv PATH /shsv/Custom_LSI/project/smapro_h2/output/80_scripts/:$PATH
+  set path=($path ~/newbin)
+  set path=($path ~/bin_linux)
+  set path=($path ~)
+
+alias a alias
+a       settitle      'printf "\033]0;\!*\007"'
+a       e exit
+a       s settitle
+a       cd 'chdir \!*; set iiii = `basename $cwd`  ;settitle $iiii; date'
+a       h      history
+
+alias gr 'grep --color=always'
+alias di "diff -abBr --brief \!*"
+alias l "clear;ls -l; pwd"
+alias cl "find -type l | xargs file"
+alias sta_output  'cd /shsv/MEPJ3/training/27G/ME_practice/STA/27G_OUTPUT_DIR/'
+alias sta_working  'cd /shsv/MEPJ3/training/27G/ME_practice/STA/27G_WORKING_DIR/'
+alias be_working 'cd /common/Training/201803HW/Backend_Design_Practice_Basic/Design/GROUP_2/Design/U3ES2_RTDS_GROUP_2_huannguyen_2218/'
+
+
+# Online Destination Board
+source /home/Common/Meeting/Eng_General/Online_Destination_Board/2F/user/alias.seat
+
