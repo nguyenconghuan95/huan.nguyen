@@ -1,0 +1,52 @@
+#!/bin/csh
+
+if (-f ./type_tmp.txt) then
+  rm ./type_tmp.txt
+endif
+touch ./type_tmp.txt
+
+if (-d ./tmp) then
+  rm -rf ./tmp
+endif
+mkdir ./tmp
+
+if (-f ./output.txt) then
+  rm ./output.txt
+endif
+touch ./output.txt
+
+set nu_of_lines = `wc -l < ./input.txt`
+#set nu_of_lines=100
+set i=1
+
+while ($i <= $nu_of_lines)
+  set line = `sed -n "$i"p ./input.txt`
+  set owner = `echo "$line" | awk '{split($0,a,"."); print a[3]}'`
+  if (! -f ./tmp/$owner.txt) then
+    touch ./tmp/$owner.txt
+    printf "# $owner report:\n" >> ./tmp/$owner.txt
+  endif
+  set type = `echo "$line" | awk '{split($0,a,":"); print a[8]}' | awk '{split($0,b," "); print b[1]}'`
+  grep -q "$type" ./type_tmp.txt || echo $type >> ./type_tmp.txt
+  sort ./type_tmp.txt -o ./type_tmp.txt 
+  @ i = $i + 1
+end
+
+foreach file (`find ./tmp -iname "*.txt" | sort`)
+  set filename = `basename $file | awk '{split($0,a,"."); print a[1]}'`
+  foreach type (`cat ./type_tmp.txt`)
+    set nu_of_type = `grep "$filename" ./input.txt | grep "$type" | wc -l`
+    if ($nu_of_type == '0') then
+      printf "%-19s : No transfer.\n" $type >> $file
+    else 
+      printf "%-19s : %s\n" $type $nu_of_type >> $file
+    endif
+  end
+  cat $file >> ./output.txt
+  echo "" >> ./output.txt
+end 
+
+rm ./type_tmp.txt
+rm -rf ./tmp
+
+
