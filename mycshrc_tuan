@@ -1,0 +1,145 @@
+
+#!/bin/sh -fx
+set date = `date +"%A  - %d/%m/20%y "`
+
+echo " Today: $date                                         " 
+echo "                    Welcome NIUM!                     "
+echo "                 KEEP MOVING FORWARD                  "
+echo " ====================================================="
+
+# HOST
+# =========================================================================================
+alias host    'xhost +'
+alias vcs_debug "vcs -R -debug_pp"
+setenv LSF_BUMON 515
+setenv LSF_SAKUBAN C009180
+setenv LSF_PROJECT SV
+#setenv LSF_n_OPTION_span "span[hosts=1]"
+#setenv DISPLAY 172.29.143.204:0.0
+source /common/lsftool/RBS/dotfiles/lsf_cshrc
+# =========================================================================================
+# SYSTEM SETTINGS
+# =========================================================================================
+set HOSTNAME = hostname
+set paste
+set ignoreeof
+set noclobber 
+set history=10000
+set savehist=1000
+set autolist
+set complete = igncase
+unset autologout
+umask 022
+
+# =========================================================================================
+# COMMAND LINE 
+# =========================================================================================
+#set prompt = "%{\033[31m%}[%{\033[32m%}`hostname` %{\033[36m%}: %{\033[35m%}`pwd`%{\033[31m%}] \n%{\033[31m%}[%{\033[34m%}=====>>> %{\033[31m%}]%{\033[0m%}$ "
+set prompt = "%{\033[31m%}[%{\033[32m%}`hostname` %{\033[36m%}: %{\033[35m%}`pwd`%{\033[31m%}] \n%{\033[31m%}[%{\033[34m%}COMMAND%{\033[31m%}]%{\033[0m%} "
+
+
+# =========================================================================================
+# ALIAS
+# =========================================================================================
+alias c       'clear'
+
+alias new     'mkdir '
+alias rm      'rm -rf'
+alias mv      'mv -i'
+alias cp      'cp -rf '
+#alias df      'df -h | grep "CUSTOM_LSI|OA_ICT"'
+
+alias cd      'chdir \!*;l ; set prompt = "%{\033[31m%}[%{\033[32m%}CURRENT %{\033[36m%}: %{\033[35m%}`pwd`%{\033[31m%}]\n%{\033[31m%}[%{\033[34m%}COMMAND%{\033[31m%}]%{\033[0m%} "'
+alias l       'll -h'
+alias lt      'l -t'
+alias bl      'cd ../ '
+alias b2      'cd ../../'
+alias b3      'cd ../../../'
+alias b4      'cd ../../../../'
+
+alias lg      'll | egrep -i --color'
+alias search  '~/mycommand/search '
+#alias grep    'egrep -irn --color'
+alias grep    'egrep -ir --color'
+
+alias 775     'chmod 775 -R '
+alias 755     'chmod 755 -R '
+alias 777     'chmod 777 -R '
+alias 700     'chmod 700 -R '
+
+alias mycshrc 'vi ~/.mycshrc'
+alias disk    'du -csh *'
+alias vd      'vimdiff '
+alias lookup    'apropos '
+
+alias di      "diff -abBr --brief \!*"
+alias vi      '/common/appl/VIM72-64bit/bin/vim -O'
+#alias vi      '/common/appl/VIM71/bin/vim -O'
+alias word    '/common/appl/antiword-0.37/bin/antiword '
+alias planner '/common/appl/Planner/0.14.2/bin/planner '
+alias foxit   '/common/appl/Foxit-Reader/FoxitReader '
+alias pdf    '/common/appl/Adobe/AdobeReader-9.5.1/acroread '
+alias dict    '/common/appl/stardict/bin/stardict '
+alias gzip    'gzip -rf '
+
+# =========================================================================================
+alias home    'cd /shsv/Custom_LSI/user/tuanminhtran/'
+alias burst   'cd /shsv/Custom_LSI/project/burst'
+alias mytaga  'cd /shsv/Custom_LSI/user/tuanminhtran/Project/TAGAPELL'
+alias dve     './go_dve -t 18:30'
+# =========================================================================================
+alias on      'won_2F 075'
+alias off     'wof_2F'
+alias won_2F  'won_2F '
+alias wof_2F  'wof_2F '
+alias in10    'fwi_2F 10:00'
+alias in9     'fwi_2F 9:00'
+
+
+#####################################################################
+# Open file
+#####################################################################
+alias oo        '/common/appl/OO/OO_4.0.1-32bit/program/soffice \!* &'
+alias kon       'konqueror &'
+alias calendar  '/usr/bin/korganizer &'
+alias paint     '/usr/bin/kolourpaint &'
+alias mail      '/common/appl/Thunderbird/6.0/thunderbird &'
+alias ff        '/common/appl/Firefox/15.0/firefox &'
+alias map       '/common/appl/freemind/0.8.1/freemind.sh &' 
+alias open       'cp -rf \!* /common/work/tuanminhtran/document/'
+
+
+#-------------------------------CONVERT_TOOL-----------------------
+alias cv '/shsv/Custom_LSI/user/tuanminhtran/Script/convert_linux_w7_path/win_lin.pl'
+alias cc 'cv `pwd`'
+
+#-------------------------------Link------------------------------
+setenv Custom_LSI "/shsv/Custom_LSI"
+setenv home "/shsv/Custom_LSI/user/tuanminhtran"
+setenv espada    "/shsv/Custom_LSI/project/espada"
+setenv burst     "/shsv/Custom_LSI/project/burst"
+setenv tagapell  "/shsv/Custom_LSI/project/tagapell"
+setenv mytaga    "/shsv/Custom_LSI/user/tuanminhtran/Project/TAGAPELL"
+
+setenv cadence  "/common/appl/Cadence"
+setenv synopsys "/common/appl/Synopsys"
+
+#----------------------------PATH-----------------------------
+setenv PATH  "$PATH /home/u/tuanminhtran/mycommand"
+setenv PATH  "/common/appl/VIM71/bin/:${PATH}"
+
+# Online Destination Board
+source /home/Common/Meeting/Eng_General/Online_Destination_Board/2F/user/alias.seat
+
+# *** TAR command ***
+#Compress:
+#Extract..
+
+#.....to current directory
+#  tar -xvf yourFile.tar
+#or
+#  tar -xvf yourFile.tar.gz
+alias untar 'tar -xvf '
+
+#.....to specific directory
+#  tar -C /myFolder -xvf yourFile.tar

@@ -1,0 +1,178 @@
+"Sep 18. 2017
+"New vimrc created by Tuan
+
+"------------------------------------------
+"GENERAL SETTINGS
+"------------------------------------------
+
+"******************
+"Display settings
+"******************
+"Set filetype to different highlights
+set ft=verilog "default filetype = verilog
+au BufNewFile,BufRead   *.pat,*.utp,*.def,*.sv,*.inc  set ft=verilog
+au BufNewFile,BufRead   *.sv  set ft=sv
+au BufNewFile,BufRead   *.exp,*.so,*.bat,*.cmd  set ft=csh
+au BufNewFile,BufRead   *.inc,*.list,*.ms*,*.src,*.s  set ft=asm
+
+set splitbelow                    " New window will be in the bottom when splitting
+set nowrap                        " Do not auto enter newline at window border
+"set wrap                          " Wrap at window border
+set linebreak                     " On Wrap enabled,break at space/tab only
+set nu                            " Display line number
+set mouse=a                       " Mouse mode = auto
+set ruler                         " Display ruler
+set showmode                      " Show current VIM-mode
+set sidescroll=1 sidescrolloff=5    " Scroll when the cursor is near the edge of the screen
+colo darkblue
+hi CursorLine cterm=bold
+set cul
+
+
+"******************
+"Input settings
+"******************
+set autoindent                      " Copy indent from current line when starting new line
+set backspace=indent,eol,start      " Correct Backspace function
+set clipboard=unnamed               " Auto select unnamed register as clipboard for yy and dd
+set complete=.,d                    " Completion in current buffer and included files
+set expandtab
+set pumheight=5                     " Maximum 5 suggestions when doing completion 
+set shiftwidth=4                    " Number of space that a shift '>|>>|<|<<' account for
+set tabstop=4                       " Number of space that a tab account for
+set undolevels=5000 
+
+"******************
+"File system settings
+"******************
+set nobackup 
+
+"******************
+"Search & highlights
+"******************
+syntax on
+set history=50		                   " keep 50 lines of command line history
+set hlsearch
+"set incsearch
+set ignorecase 
+set smartcase
+set nocompatible
+set showmatch                        "Show briefly if search matching one
+se wildmenu                          "Show help search menu
+se wildmode=longest,list
+
+"------------------------------------------
+"CUSTOM FUNCTIONS
+"------------------------------------------
+  "CLEVER TAB
+       function! CleverTab()
+          if strpart( getline('.'), col('.')-2,1 ) =~ '^\s*$'
+         return "\<Tab>"
+          else
+         return "\<C-N>"
+       endfunction
+  "SET MOUSE
+      function! SetMouse()
+          if &mouse =~ "a"
+            set mouse=i
+            echo "mouse=i"
+          else
+            set mouse=a
+            echo "mouse=a"
+          endif
+      endfunction
+  "SET LINE NUMBER
+      function! SetNu()
+          if &nu == 1
+            set nonu
+            echo "set nonu"
+          else
+            set nu
+            echo "set nu"
+          endif
+      endfunction
+  "SET CURSORLINE
+      function! SetCul()
+          if &cul == 1
+            set nocul
+            echo "set nocul"
+          else
+            set cul
+            echo "set cul"
+            hi CursorLine cterm=bold
+          endif
+      endfunction
+   "QUICK COMMENTING
+      function! QuickCmt()
+          if &ft == "verilog"
+            echo "verilog"
+            return "norm I//<ESC>"
+          endif
+      endfunction
+       
+
+"------------------------------------------
+"KEY MAPPINGS
+"------------------------------------------
+  "CLEVER TAB
+     " Map key Tab: go-down, Shift-Tab : go-up
+        inoremap <Tab> <C-R>=CleverTab()<CR>
+        inoremap <S-Tab> <C-P>
+  "SET MOUSE
+        nnoremap <F2> :call SetMouse()<CR>
+  "SET LINE NUMBER
+        nnoremap <F3> :call SetNu()<CR>
+  "QUICK REPLACE
+        nnoremap <F4> :%s:::g<left><left><left>
+  "SET CURSORLINE
+        nnoremap <F5> :call SetCul()<CR>
+  "SET NO HIGHLIGHT
+        nnoremap <F6> :noh<CR>
+  "SET FILETYPE = CSH"
+        nnoremap <F7> :set ft=csh<CR>
+  "SET WRAP
+        nnoremap <F8> :set wrap<CR>
+  "CLOSE/SAVE MAPPING
+        map jk :qa<CR>
+        map lkj :wqa<CR>
+        map gf <C-W><C-F>
+  "QUICK MACRO
+        nnoremap Q @q   
+        nnoremap M `m   
+        nnoremap mmm mt 
+        nnoremap T `t   
+  "AUTO INSERT CLOSING BRACKET },],),",'
+        " inoremap { {}<ESC>i
+        " inoremap [ []<ESC>i
+        " inoremap ( ()<ESC>i
+        " inoremap " ""<ESC>i
+        " inoremap ' ''<ESC>i
+        inoremap {<CR> {<CR>}<ESC>O<space><space>
+   "  "AUTO INSERT COMMENT MARKER
+   "       au BufNewFile,BufRead   *.pat,*.utp,*.def,*.sv,*.inc,*.v,*.V inoremap <S-K> <CR>//
+   "       au BufNewFile,BufRead   *.exp,*.so,*.bat,*.cmd,*.csh  inoremap <S-K> <CR>#
+   "       au BufNewFile,BufRead   *.inc,*.list,*.ms*,*.src,*.s  inoremap <S-K> <CR>;
+   "QUICK COMMENTING
+       " au BufNewFile,BufRead   *.pat,*.utp,*.def,*.sv,*.inc,*.v,*.V nnoremap <S-K> I//<ESC>
+       " au BufNewFile,BufRead   *.exp,*.so,*.bat,*.cmd,*.csh  nnoremap <S-K> I#<ESC>
+       " au BufNewFile,BufRead   *.inc,*.list,*.ms*,*.src,*.s  nnoremap <S-K> I;<ESC>
+   ""     nnoremap <S-K> :call QuickCmt()<CR>
+   "AUTO INSERT <rdve: OF XML"
+   au BufNewFile,BufRead  *.xml inoremap <Tab> <rdve:
+   au BufNewFile,BufRead  *.xml inoremap <S-Tab> </rdve:
+
+  "FOLD METHOD
+  "place fold_begin at the beginning of a fold
+  "place fold_end at the ending of that fold
+  "press zc inside fold to fold it
+  "when the file is re-opened, fold is still there.
+       :set foldmethod=marker
+       :set foldmarker=fold_begin,fold_end
+
+hi CursorLine cterm=bold
+hi DiffAdd    ctermbg=9 ctermfg=2
+hi DiffDelete ctermbg='Black'
+hi DiffText   ctermfg='Cyan'
+hi DiffChange ctermbg=9
+
+
