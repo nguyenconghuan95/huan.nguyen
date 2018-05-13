@@ -1,10 +1,46 @@
+#!/bin/csh
+set date = `date + "%A  - %d%m/20%y"`
+
+echo "================================================"
+echo " Today: $date                                   "
+echo "                    Welcome Huan                "
+echo "              HAVE A NICE WORKING DAY           "
+echo "================================================"
+
 #24G xhost +
 #24G source /common/appl/Env/Synopsys/vcs-mx_vD-2009.12-4
 #24G setenv SNPSLMD_LICENSE_FILE 27000@lictrain1
 #24G setenv LM_LICENSE_FILE 27000@lictrain1
 #24G setenv LSFBS_SMALL_VCS YES
 
-echo "hello"
+#==============================================================================================================
+# HOST
+#==============================================================================================================
+alias host 'xhost +'
+alias vcs_debug 'vcs -R -debug_pp'
+setenv LSF_BUMON 515
+setenv LSF_SAKUBAN C009180
+setenv LSF_PROJECT SV
+source /common/lsftool/RBS/dotfiles/lsf_cshrc
+#==============================================================================================================
+
+#==============================================================================================================
+# SYSTEM SETTING
+#==============================================================================================================
+set HOSTNAME = hostname
+set paste
+set ignoreeof
+set history = 10000
+set savehist = 1000
+set autolist
+set complete =igncase
+unmask 022
+
+#==============================================================================================================
+# COMMAND LINE
+#==============================================================================================================
+set prompt = "%{\033[31m%}[%{\033[32m%}`hostname` %{\033[36m%}: %{\033[35m%}`pwd`%{\033[31m%}] \n%{\033[31m%}[%{\033[34m%}COMMAND%{\033[31m%}]%{\033[0m%} "
+
 #24G setenv PATH /common/appl/gcc-3.3.6/bin/:$PATH
 #source /common/lsftool/RBS/dotfiles/lsf_cshrc
 #setenv LSF_PROJECT SV
