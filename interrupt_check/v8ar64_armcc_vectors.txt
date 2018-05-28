@@ -1,0 +1,622 @@
+;-----------------------------------------------------------------------------
+; The confidential and proprietary information contained in this file may
+; only be used by a person authorised under and to the extent permitted
+; by a subsisting licensing agreement from ARM Limited.
+;
+;            (C) COPYRIGHT 2013-2016 ARM Limited.
+;                ALL RIGHTS RESERVED
+;
+; This entire notice must be reproduced on all copies of this file
+; and copies of this file may only be made by a person if such person is
+; permitted to do so under the terms of a subsisting license agreement
+; from ARM Limited.
+;
+;      Release Information : CORTEXA53-r0p4-00rel1
+;-----------------------------------------------------------------------------
+
+        AREA  vectors, CODE, READONLY
+        PRESERVE8
+
+; Weakly import replacement handlers.  This allows a test to redefine
+; handlers.  If it doesn't, the default ones below will be used.
+
+        global  vector_table
+        extern  curr_el_sp0_sync_vector [weak]
+        extern  curr_el_sp0_irq_vector [weak]
+        extern  curr_el_sp0_fiq_vector [weak]
+        extern  curr_el_sp0_serror_vector [weak]
+        extern  curr_el_spx_sync_vector [weak]
+        extern  curr_el_spx_irq_vector [weak]
+        extern  curr_el_spx_fiq_vector [weak]
+        extern  curr_el_spx_serror_vector [weak]
+        extern  lower_el_aarch64_sync_vector [weak]
+        extern  lower_el_aarch64_irq_vector [weak]
+        extern  lower_el_aarch64_fiq_vector [weak]
+        extern  lower_el_aarch64_serror_vector [weak]
+        extern  lower_el_aarch32_sync_vector [weak]
+        extern  lower_el_aarch32_irq_vector [weak]
+        extern  lower_el_aarch32_fiq_vector [weak]
+        extern  lower_el_aarch32_serror_vector [weak]
+        extern  SYNCHandler_test [weak]
+        extern  IRQHandler_test [weak]
+        extern  FIQHandler_test [weak]
+        extern  ERRHandler_test [weak]
+        extern  SYNC_TAKEN [weak]
+        extern  IRQ_TAKEN [weak]
+        extern  FIQ_TAKEN [weak]
+        extern  ERR_TAKEN [weak]
+; Start of vectors
+        align 0x800
+; Current EL with SP0
+vector_table
+curr_el_sp0_sync
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       SYNCHandler_test
+        adrl     x2, SYNC_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+; Branch to the weakly-imported test-defined handler.  If the test
+; does not define a handler then this instruction behaves like a NOP.
+                b       curr_el_sp0_sync_vector
+
+; Default code when a test does not define a replacement handler
+                ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, curr_el_sp0_sync1
+                bl      print
+                b       terminate
+
+curr_el_sp0_sync1
+        ;info 0 "Unexpected : curr_el_sp0_sync\n"
+; Each vector occupies a 128-byte space, aligned on a 128-byte
+; boundary.  The following directives provide an assembly-time check
+; that the instructions used in the vector do not exceed 128 bytes.
+        ;if  (.>(curr_el_sp0_sync + 0x80))
+        ;  info 0 "curr_el_sp0_sync vector too large. Maximum is 128 bytes."
+        ;endif
+
+; Ensure next vector is aligned to the correct boundary
+        ltorg
+        align 0x80
+curr_el_sp0_irq
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       IRQHandler_test
+        ;adr     x2, IRQ_TAKEN
+        ;LDR     w2,[x2]
+        ;CMP     w2, #1
+        ;BEQ     continue_to_test
+        B     continue_to_test
+        b       curr_el_sp0_irq
+        ldr     x0, =0x80131FD0; Tube address
+        adrl     x1, curr_el_sp0_irq1
+        bl      print
+        b       terminate
+
+curr_el_sp0_irq1
+        ;                 info 0 "Unexpected : curr_el_sp0_irq\n"
+        ;if  (. > (curr_el_sp0_irq + 0x80))
+        ;  info 0 "curr_el_sp0_irq vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+curr_el_sp0_fiq
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       FIQHandler_test
+        adrl     x2, FIQ_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       curr_el_sp0_fiq_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, curr_el_sp0_fiq1
+        bl      print
+        b       terminate
+
+curr_el_sp0_fiq1
+        ;                 info 0 "Unexpected : curr_el_sp0_fiq\n"
+        ;if  (. > (curr_el_sp0_fiq + 0x80))
+        ;  info 0 "curr_el_sp0_fiq vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+curr_el_sp0_serror
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       ERRHandler_test
+        adrl     x2, ERR_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       curr_el_sp0_serror_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, curr_el_sp0_serror1
+        bl      print
+        b       terminate
+
+curr_el_sp0_serror1
+        ;                 info 0 "Unexpected : curr_el_sp0_serror\n"
+        ;if  (. > (curr_el_sp0_serror + 0x80))
+        ;  info 0 "curr_el_sp0_serror vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+curr_el_spx_sync
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       SYNCHandler_test
+        adrl     x2, SYNC_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       curr_el_spx_sync_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, curr_el_spx_sync1
+        bl      print
+        b       terminate
+
+curr_el_spx_sync1
+        ;                 info 0 "Unexpected : curr_el_spx_sync\n"
+        ;if  (. > (curr_el_spx_sync + 0x80))
+        ;  info 0 "curr_el_spx_sync vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+curr_el_spx_irq
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       IRQHandler_test
+        ;adr     x2, IRQ_TAKEN
+        ;LDR     w2,[x2]
+        ;CMP     w2, #1
+        ;BEQ     continue_to_test
+        B     continue_to_test
+        b       curr_el_spx_irq
+        ldr     x0, =0x80131FD0; Tube address
+        adrl     x1, curr_el_spx_irq1
+        bl      print
+        b       terminate
+
+curr_el_spx_irq1
+        ;                 info 0 "Unexpected : curr_el_spx_irq\n"
+        ;if  (. > (curr_el_spx_irq + 0x80))
+        ;  info 0 "curr_el_spx_irq vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+curr_el_spx_fiq
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       FIQHandler_test
+        adrl     x2, FIQ_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       curr_el_spx_fiq_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, curr_el_spx_fiq1
+        bl      print
+        b       terminate
+
+curr_el_spx_fiq1
+        ;                 info 0 "Unexpected : curr_el_spx_fiq\n"
+        ;if  (. > (curr_el_spx_fiq + 0x80))
+        ;  info 0 "curr_el_spx_fiq vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+curr_el_spx_serror
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       ERRHandler_test
+        adrl     x2, ERR_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       curr_el_spx_serror_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, curr_el_spx_serror1
+        bl      print
+        b       terminate
+
+curr_el_spx_serror1
+        ;                 info 0 "Unexpected : curr_el_spx_serror\n"
+        ;if  (. > (curr_el_spx_serror + 0x80))
+        ;  info 0 "curr_el_spx_serror vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+lower_el_aarch64_sync
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       SYNCHandler_test
+        adrl     x2, SYNC_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       lower_el_aarch64_sync_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, lower_el_aarch64_sync1
+        bl      print
+        b       terminate
+
+lower_el_aarch64_sync1
+        ;                 info 0 "Unexpected : lower_el_aarch64_sync\n"
+        ;if  (. > (lower_el_aarch64_sync + 0x80))
+        ;  info 0 "lower_el_aarch64_sync vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+lower_el_aarch64_irq
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       IRQHandler_test
+        ;adr     x2, IRQ_TAKEN
+        ;LDR     w2,[x2]
+        ;CMP     w2, #1
+        ;BEQ     continue_to_test
+        B     continue_to_test
+        b       lower_el_aarch64_irq_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, lower_el_aarch64_irq1
+        bl      print
+        b       terminate
+
+lower_el_aarch64_irq1
+        ;                 info 0 "Unexpected : lower_el_aarch64_irq\n"
+        ;if  (. > (lower_el_aarch64_irq + 0x80))
+        ;  info 0 "lower_el_aarch64_irq vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+lower_el_aarch64_fiq
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       FIQHandler_test
+        adrl     x2, FIQ_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       lower_el_aarch64_fiq_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, lower_el_aarch64_fiq1
+        bl      print
+        b       terminate
+
+lower_el_aarch64_fiq1
+        ;                 info 0 "Unexpected : lower_el_aarch64_fiq\n"
+        ;if  (. > (lower_el_aarch64_fiq + 0x80))
+        ;  info 0 "lower_el_aarch64_fiq vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+lower_el_aarch64_serror
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       ERRHandler_test
+        adrl     x2, ERR_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       lower_el_aarch64_serror_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, lower_el_aarch64_serror1
+        bl      print
+        b       terminate
+
+lower_el_aarch64_serror1
+        ;                 info 0 "Unexpected : lower_el_aarch64_serror\n"
+        ;if  (. > (lower_el_aarch64_serror + 0x80))
+        ;  info 0 "lower_el_aarch64_serror vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+lower_el_aarch32_sync
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       SYNCHandler_test
+        adrl     x2, SYNC_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       lower_el_aarch32_sync_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, lower_el_aarch32_sync1
+        bl      print
+        b       terminate
+
+lower_el_aarch32_sync1
+        ;                 info 0 "Unexpected : lower_el_aarch32_sync\n"
+        ;if  (. > (lower_el_aarch32_sync + 0x80))
+        ;  info 0 "lower_el_aarch32_sync vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+lower_el_aarch32_irq
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       IRQHandler_test
+        ;adr     x2, IRQ_TAKEN
+        ;LDR     w2,[x2]
+        ;CMP     w2, #1
+        ;BEQ     continue_to_test
+        B     continue_to_test
+        b       lower_el_aarch32_irq_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, lower_el_aarch32_irq1
+        bl      print
+        b       terminate
+
+lower_el_aarch32_irq1
+        ;                 info 0 "Unexpected : lower_el_aarch32_irq\n"
+        ;if  (. > (lower_el_aarch32_irq + 0x80))
+        ;  info 0 "lower_el_aarch32_irq vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+lower_el_aarch32_fiq
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       FIQHandler_test
+        adrl     x2, FIQ_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       lower_el_aarch32_fiq_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, lower_el_aarch32_fiq1
+        bl      print
+        b       terminate
+
+lower_el_aarch32_fiq1
+        ;                 info 0 "Unexpected : lower_el_aarch32_fiq\n"
+        ;if  (. > (lower_el_aarch32_fiq + 0x80))
+        ;  info 0  "lower_el_aarch32_fiq vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+lower_el_aarch32_serror
+        STP x29,x30,[sp,#-0x10]!
+        STP x0, x1, [sp,#-0x10]!
+        STP x2, x3, [sp,#-0x10]!
+        STP x4, x5, [sp,#-0x10]!
+        STP x6, x7, [sp,#-0x10]!
+        STP x8, x9, [sp,#-0x10]!
+        STP x10, x11, [sp,#-0x10]!
+        STP x12, x13, [sp,#-0x10]!
+        STP x14, x15, [sp,#-0x10]!
+        STP x16, x17, [sp,#-0x10]!
+        STP x18, x19, [sp,#-0x10]!
+        STP x20, x21, [sp,#-0x10]!
+        bl       ERRHandler_test
+        adrl     x2, ERR_TAKEN
+        LDR     w2,[x2]
+        CMP     w2, #1
+        BEQ     continue_to_test
+        b       lower_el_aarch32_serror_vector
+        ldr     x0, =0x80131FD0 ; Tube address
+                adrl     x1, lower_el_aarch32_serror1
+        bl      print
+        b       terminate
+
+lower_el_aarch32_serror1
+        ;                 info 0 "Unexpected : lower_el_aarch32_serror\n"
+        ;if  (. > (lower_el_aarch32_serror + 0x80))
+        ;  info 0 "lower_el_aarch32_serror vector too large. Maximum is 128 bytes."
+        ;endif
+
+        ltorg
+        align 0x80
+
+; -----------------------------------------------------------------------------
+; End of vectors
+; -----------------------------------------------------------------------------
+
+; Print a string to the tube
+;    Expects: x0 -> tube
+;             x1 -> message
+;    Modifies x2
+print
+;        ldrb    w2, [x1], #1
+;        cbz     w2, print1
+;        strb    w2, [x0]
+;        b       print
+print1
+        ret
+
+; Print failure message and terminate simulation.
+; Assumes x0 points to the tube
+terminate
+;        adr     x1, fail_str
+;        bl      print
+;        mov     w2, #0x4  ; EOT character
+;        strb    w2, [x0]  ; Terminate simulation
+        b       .
+
+; Failure string for unexpected exceptions
+fail_str
+        ;info 0 "** TEST FAILED**\n"
+        align 8
+continue_to_test
+        LDP x20, x21, [sp], #0x10
+        LDP x18, x19, [sp], #0x10
+        LDP x16, x17, [sp], #0x10
+        LDP x14, x15, [sp], #0x10
+        LDP x12, x13, [sp], #0x10
+        LDP x10, x11, [sp], #0x10
+        LDP x8, x9,   [sp], #0x10
+        LDP x6, x7,   [sp], #0x10
+        LDP x4, x5,   [sp], #0x10
+        LDP x2, x3,   [sp], #0x10
+        LDP x0, x1,   [sp], #0x10
+        LDP x29,x30,  [sp], #0x10
+        ERET
+
+        end
+

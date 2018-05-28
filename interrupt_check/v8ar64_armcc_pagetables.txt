@@ -1,0 +1,254 @@
+;-----------------------------------------------------------------------------
+; The confidential and proprietary information contained in this file may
+; only be used by a person authorised under and to the extent permitted
+; by a subsisting licensing agreement from ARM Limited.
+;
+;            (C) COPYRIGHT 2013-2016 ARM Limited.
+;                ALL RIGHTS RESERVED
+;
+; This entire notice must be reproduced on all copies of this file
+; and copies of this file may only be made by a person if such person is
+; permitted to do so under the terms of a subsisting license agreement
+; from ARM Limited.
+;
+;      Release Information : CORTEXA53-r0p4-00rel1
+;-----------------------------------------------------------------------------
+;  Description:
+;
+;    Set up translation tables for the execution_tb tests.  Short descriptor
+;    format sections are used, each defining 1MB of the memory space.
+;
+;    The 1MB region containing the validation peripherals is marked as
+;    strongly ordered.  The rest of the memory space is marked as normal
+;    shareable memory./svhome/kojimaku/validation_sample_ds5_20180227
+; -------------------------------------------------------------------------------
+
+        area boot, CODE, COMDEF, ALIGN=3
+        global  ttb0_base
+        global  mair_value
+
+XN             EQU (1<<22)
+PXN            EQU (1<<21)
+CONTIG         EQU (1<<20)
+
+NGLOBAL        EQU (1<<11)
+AF             EQU (1<<10)
+NON_SH         EQU (0<<8)
+OUTER_SH       EQU (2<<8)
+INNER_SH       EQU (3<<8)
+AP2            EQU (1<<7)
+AP1            EQU (1<<6)
+NS             EQU (1<<5)
+IDX0           EQU (0<<2)
+IDX1           EQU (1<<2)
+IDX2           EQU (2<<2)
+IDX3           EQU (3<<2)
+IDX4           EQU (4<<2)
+IDX5           EQU (5<<2)
+IDX6           EQU (6<<2)
+IDX7           EQU (7<<2)
+BLOCK          EQU (1<<0)
+TABLE          EQU (3<<0)
+UNMAPPED       EQU (0<<0)
+
+OUTER_WT       EQU (0<<6)
+OUTER_WB       EQU (1<<6)
+OUTER_NC       EQU (1<<6)
+OUTER_NONTRANS EQU (1<<7)
+OUTER_WRALLOC  EQU (1<<4)
+OUTER_RDALLOC  EQU (1<<5)
+
+nGnRnE         EQU 0x00
+nGnRE          EQU 0x04
+nGRE           EQU 0x08
+GRE            EQU 0x0C
+
+INNER_WT       EQU (0<<2)
+INNER_WB       EQU (1<<2)
+
+INNER_NONTRANS EQU (1<<3)
+INNER_WRALLOC  EQU (1<<0)
+INNER_RDALLOC  EQU (1<<1)
+
+IO_WBRWA       EQU (OUTER_WB :OR: OUTER_NONTRANS :OR: OUTER_WRALLOC :OR: OUTER_RDALLOC :OR: INNER_WB :OR: INNER_NONTRANS :OR: INNER_WRALLOC :OR: INNER_RDALLOC)
+
+; Memory attributes for MAIR
+ATTR0          EQU nGnRnE
+ATTR1          EQU nGnRE
+ATTR2          EQU IO_WBRWA
+ATTR3          EQU 0
+ATTR4          EQU 0
+ATTR5          EQU 0
+ATTR6          EQU 0
+ATTR7          EQU 0
+
+ARCH EQU 64
+BIGEND EQU 0
+
+; Put 64-bit value with correct endianness
+        macro 
+        PUT_64B $high, $low
+        if  (ARCH == 64)
+                DCQ ($high << 32) + $low
+        else
+        if  (BIGEND == 0)
+        DCD $low
+        DCD $high
+        else
+        DCD $low
+        DCD $high
+        endif
+        endif
+        mend
+
+mair_value
+        PUT_64B (ATTR7<<24) :OR: (ATTR6<<16) :OR: (ATTR5<<8) :OR: (ATTR4<<0), (ATTR3<<24) :OR: (ATTR2<<16) :OR: (ATTR1<<8) :OR: (ATTR0<<0)
+
+; Memory is marked as inner and outer cacheable + write allocate
+MEMORY            EQU (IDX2 :OR: AP1 :OR: AF :OR: NS)
+DEVICE            EQU (IDX1 :OR: AP1 :OR: AF)
+SO_MEMORY         EQU (IDX0 :OR: AP1 :OR: AF)
+
+SHARED_MEMORY     EQU (MEMORY    :OR: INNER_SH)
+SHARED_SO_MEMORY  EQU (SO_MEMORY :OR: INNER_SH)
+SHARED_DEVICE     EQU (DEVICE    :OR: INNER_SH)
+
+;         Create an entry pointing to a next-level table
+        macro 
+        TABLE_ENTRY $PA, $ATTR
+        PUT_64B $ATTR, (($PA) + TABLE)
+        mend
+
+;         Create an entry for a 1GB block
+        macro 
+        BLOCK_1GB $PA, $ATTR_HI, $ATTR_LO
+        PUT_64B   $ATTR_HI, (($PA)  &  0xC0000000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        mend
+
+;         Create an entry for a 2MB block
+        macro 
+        BLOCK_2MB $PA, $ATTR_HI, $ATTR_LO
+        PUT_64B   $ATTR_HI, (($PA)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        mend
+
+;         Create an entry for a 32MB block (using multiple 2MB blocks
+        macro 
+        BLOCK_32MB $PA, $ATTR_HI, $ATTR_LO
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA)                   &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x0200000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x0400000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x0600000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x0800000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x0A00000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x0C00000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x0E00000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x1000000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x1200000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x1400000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x1600000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x1800000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x1A00000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x1C00000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        PUT_64B   $ATTR_HI  :OR:  CONTIG, (($PA  :OR:  0x1E00000)  &  0xFFE00000)  :OR:  $ATTR_LO  :OR:  BLOCK
+        mend
+
+; -----------------------------------------------------------------------------
+; Second-level table
+; -----------------------------------------------------------------------------
+; 0x00000000 - 0x12FFFFFF : Memory
+; 0x13000000 - 0x13FFFFFF : Device (trickbox area)
+; 0x14000000 - 0x3FFFFFFF : Memory
+
+; Align to page
+        align (1<<12)
+ttb_second_level_0
+; Address counter for blocks
+        GBLA ADDR
+ADDR SETA 0
+        ; Range 0x00_0000_0000 -> 0x00_01FF_FFFF
+        BLOCK_32MB (ADDR << 20), 0, SHARED_MEMORY
+ADDR SETA ADDR+32
+
+        ; Range 0x00_0200_0000 -> 0x00_03FF_FFFF
+        ;BLOCK_32MB (ADDR << 20), 0, SHARED_MEMORY
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+
+        ; Range 0x00_0400_0000 -> 0x00_05FF_FFFF
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+
+        ; Range 0x00_0600_0000 -> 0x00_07FF_FFFF
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+
+        ; Range 0x00_0800_0000 -> 0x00_09FF_FFFF
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+
+        ; Range 0x00_0A00_0000 -> 0x00_0BFF_FFFF
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+
+        ; Range 0x00_0C00_0000 -> 0x00_0DFF_FFFF
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+
+        ; Range 0x00_0E00_0000 -> 0x00_0FFF_FFFF
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+
+        ; Range 0x00_1000_0000 -> 0x00_11FF_FFFF
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+
+        ; Range 0x00_1200_0000 -> 0x00_13FF_FFFF
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+
+        ; ======================================
+        ; Range 0x00_1400_0000 -> 0x00_7FFF_FFFF
+        GBLA CNT
+CNT SETA 0
+        while CNT < ((0x800 - 0x140) / 32)
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+CNT SETA CNT+1
+        wend
+        ; ======================================
+
+ttb_second_level_0_8000_0000
+        ; Range 0x00_8000_0000 -> 0x00_81FF_FFFF
+        ;BLOCK_32MB (ADDR << 20), 0, SHARED_MEMORY
+        BLOCK_32MB (ADDR << 20), 0, SHARED_MEMORY
+        ADD X1, X1, #32
+        STR X1, [X0]
+
+        ; ======================================
+        ; Range 0x00_8200_0000 -> 0x00_FFFF_FFFF
+CNT SETA 0
+        while CNT < ((0x1000 - 0x820) / 32)
+        BLOCK_32MB (ADDR << 20), 0, SHARED_DEVICE
+ADDR SETA ADDR+32
+CNT SETA CNT+1
+        wend
+        ; ======================================
+
+
+; -----------------------------------------------------------------------------
+; First-level table
+; -----------------------------------------------------------------------------
+; Entry 0: -> Second-level table
+; Entry 1: Block 0x40000000 - 0x7FFFFFFF : Memory
+; Entry 2: Block 0x80000000 - 0xBFFFFFFF : Memory
+; Entry 3: Block 0xC0000000 - 0xFFFFFFFF : Memory
+
+; Align to page
+        align (1<<12)
+ttb0_base
+        TABLE_ENTRY ttb_second_level_0, 0
+        BLOCK_1GB   0x40000000, 0, SHARED_DEVICE
+        TABLE_ENTRY ttb_second_level_0_8000_0000, 0
+        BLOCK_1GB   0xC0000000, 0, SHARED_DEVICE
+
+        end
