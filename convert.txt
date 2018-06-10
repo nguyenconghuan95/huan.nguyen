@@ -1,0 +1,27 @@
+
+Private Sub Convert_Click()
+    Dim patternRange As range
+    Dim longestLen As Integer
+    Dim addingSpace As Integer
+    Dim seperator As String
+    Dim x As Long
+    Dim y As Long
+    
+    longestLen = 0
+    Set patternRange = Application.InputBox(prompt:="Please input the pattern range:", Type:=8)
+    seperator = Application.InputBox(prompt:="Please input the seperator:", Type:=2)
+        
+    For y = 1 To patternRange.Columns.Count
+        For x = 1 To patternRange.Rows.Count
+            If (longestLen < Len(patternRange.Cells(x, y).Value)) Then
+                longestLen = Len(patternRange.Cells(x, y).Value)
+            End If
+        Next
+        For x = 1 To patternRange.Rows.Count
+            addingSpace = longestLen - Len(patternRange.Cells(x, y).Value) + 1
+            patternRange.Cells(x, y).Value = patternRange.Cells(x, y).Value & Space(addingSpace) & seperator
+        Next
+    Next
+                
+    MsgBox ("==Finish==")
+End Sub
