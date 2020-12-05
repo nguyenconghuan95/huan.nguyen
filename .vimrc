@@ -1,7 +1,6 @@
 "*************************************************
 " Highlight                                      "
 "*************************************************
-set ttymouse=xterm2
 set tabstop=2
 set expandtab
 set ruler
@@ -11,6 +10,7 @@ set mouse=a
 set nu
 set cuc
 set cul
+set isfname+={,$,}
 ":hi StatusLine ctermbg=6 ctermfg=2
 "inoremap ( ()<left>
 "inoremap [ []<left>
@@ -22,7 +22,10 @@ set cul
 
 inoremap <tab> <c-r>=CleverTab()<cr>
 inoremap <s-tab> <c-r>=CleverBackTab()<cr>
-nnoremap <c-u> g~iW<cr>
+nnoremap <c-j> <c-d>
+nnoremap <c-k> <c-u>
+vmap zy :w! ~/tmp/vitmp<CR>
+nmap zp :r ~/tmp/vitmp<CR>
 :au BufNewFile,BufRead *.src            setf asm
 :au BufNewFile,BufRead *.equ            setf asm
 :au BufNewFile,BufRead *.def            setf asm
@@ -34,7 +37,8 @@ nnoremap <c-u> g~iW<cr>
 
 :au BufNewFile,BufRead *log.stacheck*   setf verilog
 :au BufNewFile,BufRead *.V              setf verilog
-:au BufNewFile,BufRead *.sv              setf verilog
+:au BufNewFile,BufRead *.sv             setf verilog
+:au BufNewFile,BufRead *.svh            setf verilog
 
 :au BufNewFile,BufRead *.io             setf verilog
 :au BufNewFile,BufRead *.io             set  ts=5
@@ -85,6 +89,8 @@ set ts=3
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
+nmap hf <C-w>f
+nmap vf <C-w>vgf
 
 " In an xterm the mouse should work quite well, thus enable it.
 "set mouse=i
@@ -248,7 +254,7 @@ nmap <silent> <F8> :set nowrap<CR>
 map M \m   |"mark object
 map <C-m> \*   |"search object
 "hi DiffText term=underline  ctermbg=LightGrey ctermfg=Yellow guibg=Grey90
-"hi DiffChange term=underline cterm=bold ctermfg=0 ctermbg=LightGrey
+hi DiffChange term=underline cterm=bold ctermfg=0 ctermbg=225 guibg=LightGrey
 "hi DiffAdd term=underline ctermfg=0 ctermbg=LightGrey
 "hi CursorColumn term=reverse ctermbg=7 guibg=Grey90
 "hi CursorLine ctermbg=7 cterm=none
@@ -256,9 +262,9 @@ map <C-m> \*   |"search object
 
 "___________________________________________
 
-  "           "HIGHLIGHT"
+"           HIGHLIGHT
 
-  "___________________________________________
+"___________________________________________
 
  
 
@@ -268,7 +274,8 @@ map <C-m> \*   |"search object
 
           se t_Co=256
 
-          highlight DiffText term=reverse cterm=bold,underline ctermbg=15
+          highlight DiffText term=reverse cterm=bold,underline ctermfg=0 ctermbg=white
+          highlight DiffAdd  term=standout ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
 
  
 
@@ -308,26 +315,28 @@ map <C-m> \*   |"search object
 " ===============================================
 " Auto detect file type"
 " ===============================================
-au BufNewFile,BufRead   *.sh	      set filetype=csh
-au BufNewFile,BufRead   *.src	      set filetype=asm
-au BufNewFile,BufRead   *.cpp	      set filetype=verilog
+au BufNewFile,BufRead   *.sh	    set filetype=csh
+au BufNewFile,BufRead   *.src	    set filetype=asm
+au BufNewFile,BufRead   *.cpp	    set filetype=verilog
 au BufNewFile,BufRead   *.h	      set filetype=verilog
-au BufNewFile,BufRead   *.list      set filetype=verilog
-au BufNewFile,BufRead   *.lis	      set filetype=verilog
-au BufNewFile,BufRead   *.tbl	      set filetype=asm
-au BufNewFile,BufRead   *.pat	      set filetype=verilog
+au BufNewFile,BufRead   *.list    set filetype=verilog
+au BufNewFile,BufRead   *.lis	    set filetype=verilog
+au BufNewFile,BufRead   *.tbl	    set filetype=asm
+au BufNewFile,BufRead   *.pat	    set filetype=verilog
 au BufNewFile,BufRead   *.v	      set filetype=verilog
 au BufNewFile,BufRead   *.V	      set filetype=verilog
-au BufNewFile,BufRead   *.sv	      set filetype=verilog
-au BufNewFile,BufRead   *.txt	      set filetype=csh
-au BufNewFile,BufRead   *.rpt	      set filetype=verilog
-au BufNewFile,BufRead   *.LIST      set filetype=conf
-au BufNewFile,BufRead   *.ptsc      set filetype=tcl
+au BufNewFile,BufRead   *.sv	    set filetype=verilog
+au BufNewFile,BufRead   *.txt	    set filetype=csh
+au BufNewFile,BufRead   *.rpt	    set filetype=verilog
+au BufNewFile,BufRead   *.LIST    set filetype=conf
+au BufNewFile,BufRead   *.ptsc    set filetype=tcl
 au BufNewFile,BufRead   *.l	      set filetype=data
-au BufNewFile,BufRead   *.vimrc     set filetype=vim
-au BufNewFile,BufRead   *.log	      set filetype=verilog
+au BufNewFile,BufRead   *.vimrc   set filetype=vim
+au BufNewFile,BufRead   *.log	    set filetype=verilog
 
-au BufNewFile,BufRead   *.io		set filetype=verilog
+au BufNewFile,BufRead   *.io		  set filetype=verilog
+au BufRead,BufNewFile   *#c_*,*#h_*		        set filetype=c
+au BufRead,BufNewFile   *.v,*.vh,*.sv,*.svh,*#sv_*		set filetype=verilog_systemverilog
 set ttymouse=xterm2     " set to prevent VIM hang up in screen
 
 " au BufNewFile,BufRead   *.rpt      set filetype=cpp
@@ -351,3 +360,8 @@ set ttymouse=xterm2     " set to prevent VIM hang up in screen
 " ===============================================
 set expandtab
 set ts=2
+
+" ===============================================
+" Source file here
+" ===============================================
+source ~/cscope.vim
