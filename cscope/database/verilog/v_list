@@ -1,0 +1,17 @@
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/design/dut.sv
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/dut_if.sv
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/sim_config_pkg.sv
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/sim_configurator.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/top.sv
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/tx_pkg.sv
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_item.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_sequence.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_driver.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_monitor.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_coverage_collector.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_agent.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_predictor.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_evaluator.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_scoreboard.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_env.svh
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/training/frontend/uvm/lab6/uvm/tx_test.svh

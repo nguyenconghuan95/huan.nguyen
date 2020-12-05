@@ -1,0 +1,2674 @@
+cscope 15 /mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/tool/cscope/database/verilog -q 0000000171 0000014573
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#design#dut#sv_262_210
+
+1 
+moduÀ
+ 
+dut
+(
+
+2 
+öput
+ 
+˛k
+,
+
+3 
+öput
+ 
+ª£t_n
+,
+
+4 
+öput
+ 
+lﬂd_í
+,
+
+5 
+öput
+ [7:0] 
+d©a
+,
+
+6 
+ouçut
+ 
+ªg
+ [7:0] 
+ªsu…
+
+
+9 
+	gÆways
+ @(
+po£dge
+ 
+˛k
+ 
+‹
+Öo£dgê
+	gª£t_n
+Ë
+begö
+
+
+10 i‡(!
+	gª£t_n
+)
+
+11 
+	gªsu…
+ <= 8'b0;
+
+12 i‡(
+lﬂd_í
+)
+
+13 
+ªsu…
+ <
+d©a
+;
+
+14 
+íd
+
+
+16 
+	gídmoduÀ
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#dut_if#sv_257_206
+
+1 
+öãrÁ˚
+ 
+dut_if
+ (
+öput
+ 
+logic
+ 
+˛k
+);
+
+2 
+logic
+ 
+	gª£t_n
+;
+
+3 
+logic
+ 
+	glﬂd_í
+;
+
+4 
+	glogic
+ [7:0] 
+d©a
+;
+
+5 
+	glogic
+ [7:0] 
+ªsu…
+;
+
+7 
+èsk
+ 
+å™s„r
+(
+tx_pkg
+::
+tx_ôem
+ 
+tx
+);
+
+8 @(
+po£dge
+ 
+	g˛k
+);
+
+9 #1
+ns
+;
+
+10 
+	gª£t_n
+ <
+tx
+.
+ª£t_n
+;
+
+11 
+	glﬂd_í
+ <
+tx
+.
+lﬂd_í
+;
+
+12 
+	gd©a
+ <
+tx
+.
+d©a
+;
+
+13 
+ídèsk
+
+
+15 
+èsk
+ 
+gë_™_öput
+(
+tx_pkg
+::
+tx_ôem
+ 
+tx
+);
+
+16 @(
+po£dge
+ 
+	g˛k
+);
+
+17 
+	gtx
+.
+	gª£t_n
+ = 
+ª£t_n
+;
+
+18 
+	gtx
+.
+	glﬂd_í
+ = 
+lﬂd_í
+;
+
+19 
+	gtx
+.
+	gd©a
+ = 
+d©a
+;
+
+20 
+ídèsk
+
+
+22 
+èsk
+ 
+gë_™_ouçut
+(
+tx_pkg
+::
+tx_ôem
+ 
+tx
+);
+
+23 @(
+po£dge
+ 
+	g˛k
+);
+
+24 #2
+ns
+;
+
+25 
+	gtx
+.
+	gªsu…
+ = 
+ªsu…
+;
+
+26 
+ídèsk
+
+
+27 
+	gídöãrÁ˚
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#sim_config_pkg#sv_256_205
+
+1 
+∑ckage
+ 
+	gsim_c⁄fig_pkg
+;
+
+2 
+imp‹t
+ 
+	guvm_pkg
+::*;
+
+3 `
+	gö˛ude
+ "uvm_macros.svh"
+
+5 
+vútuÆ
+ 
+dut_if
+ 
+	gvif
+;
+
+7 `
+	gö˛ude
+ "sim_configurator.svh"
+
+8 
+	gíd∑ckage
+ : 
+sim_c⁄fig_pkg
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#sim_configurator#svh_253_202
+
+1 `
+i‚def
+ 
+	g__sim_c⁄figuøt‹
+
+
+2 `
+deföe
+ 
+__sim_c⁄figuøt‹
+
+
+4 
+˛ass
+ 
+sim_c⁄figuøt‹
+ 
+exãnds
+ 
+	guvm_comp⁄ít
+;
+
+5 `
+	$uvm_comp⁄ít_utûs
+(
+sim_c⁄figuøt‹
+)
+
+7 
+vútuÆ
+ 
+dut_if
+ 
+vif
+;
+
+9 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+="sim_c⁄figuøt‹", 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+10 
+su≥r
+.
+	`√w
+(
+«me
+, 
+∑ª¡
+);
+
+11 
+ídfun˘i⁄
+
+
+13 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`c⁄√˘_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+14 
+su≥r
+.
+	`c⁄√˘_pha£
+(
+pha£
+);
+
+15 
+vif
+ = 
+sim_c⁄fig_pkg
+::vif;
+
+16 
+ídfun˘i⁄
+
+
+17 
+íd˛ass
+
+
+19 `
+ídif
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#top#sv_254_203
+
+1 
+moduÀ
+ 
+t›
+();
+
+2 
+imp‹t
+ 
+	guvm_pkg
+::*;
+
+3 
+imp‹t
+ 
+	gsim_c⁄fig_pkg
+::*;
+
+4 
+imp‹t
+ 
+	gtx_pkg
+::*;
+
+6 
+öôül
+ 
+begö
+
+
+7 
+run_ã°
+();
+
+8 
+íd
+
+
+10 
+logic
+ 
+	g˛k
+;
+
+11 
+öôül
+ 
+begö
+
+
+12 
+	g˛k
+ <= 0;
+
+13 
+	gf‹evî
+ #5
+ns
+ 
+	g˛k
+ = ~
+˛k
+;
+
+14 
+íd
+
+
+17 
+wúe
+ 
+	gª£t_n
+;
+
+18 
+wúe
+ 
+	glﬂd_í
+;
+
+19 
+	gwúe
+ [7:0] 
+d©a
+;
+
+20 
+	gwúe
+ [7:0] 
+ªsu…
+;
+
+22 
+dut_if
+ 
+vif
+(
+
+23 .
+˛k
+(clk)
+
+25 
+öôül
+ 
+begö
+
+
+26 
+	gsim_c⁄fig_pkg
+::
+vif
+ = vif;
+
+27 
+íd
+
+
+30 
+assign
+ 
+	gvif
+.
+	gªsu…
+ = 
+ªsu…
+;
+
+31 
+assign
+ 
+	gª£t_n
+ = 
+vif
+.
+ª£t_n
+;
+
+32 
+assign
+ 
+	glﬂd_í
+ = 
+vif
+.
+lﬂd_í
+;
+
+33 
+assign
+ 
+	gd©a
+ = 
+vif
+.
+d©a
+;
+
+36 
+dut
+ 
+dut0
+(
+
+39 .
+ªsu…
+ (result[7:0]),
+
+41 .
+˛k
+ (clk),
+
+42 .
+ª£t_n
+ (reset_n),
+
+43 .
+lﬂd_í
+ (load_en),
+
+44 .
+d©a
+ (data[7:0]));
+
+46 
+	gídmoduÀ
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_agent#svh_252_201
+
+1 
+˛ass
+ 
+tx_agít
+ 
+exãnds
+ 
+	guvm_agít
+;
+
+2 `
+	$uvm_comp⁄ít_utûs
+(
+tx_agít
+)
+
+4 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+, 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+5 
+su≥r
+.
+	`√w
+(
+«me
+, 
+∑ª¡
+);
+
+6 
+ídfun˘i⁄
+
+
+8 
+tx_drivî
+ 
+drv
+;
+
+9 
+tx_m⁄ô‹
+ 
+m⁄
+;
+
+10 
+tx_covîage_cﬁÀ˘‹
+ 
+cov
+;
+
+11 
+uvm_£quí˚r
+#(
+tx_ôem
+Ë
+sqr
+;
+
+13 
+uvm_™Æysis_p‹t
+ #(
+tx_ôem
+Ë
+dut_ö_tx_p‹t
+;
+
+14 
+uvm_™Æysis_p‹t
+ #(
+tx_ôem
+Ë
+dut_out_tx_p‹t
+;
+
+17 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`buûd_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+18 
+m⁄
+ = 
+tx_m⁄ô‹
+::
+ty≥_id
+::
+	`¸óã
+("m⁄", 
+this
+);
+
+19 
+dut_ö_tx_p‹t
+ = 
+	`√w
+("dut_ö_tx_p‹t", 
+this
+);
+
+20 
+dut_out_tx_p‹t
+ = 
+	`√w
+("dut_out_tx_p‹t", 
+this
+);
+
+22 
+drv
+ = 
+tx_drivî
+::
+ty≥_id
+::
+	`¸óã
+("drv", 
+this
+);
+
+23 
+sqr
+ = 
+	`√w
+("sqr", 
+this
+);
+
+26 
+cov
+ = 
+tx_covîage_cﬁÀ˘‹
+::
+ty≥_id
+::
+	`¸óã
+("cov", 
+this
+);
+
+28 
+ídfun˘i⁄
+
+
+30 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`c⁄√˘_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+31 
+m⁄
+.
+dut_ö_tx_p‹t
+.
+	`c⁄√˘
+(dut_in_tx_port);
+
+32 
+m⁄
+.
+dut_out_tx_p‹t
+.
+	`c⁄√˘
+(dut_out_tx_port);
+
+34 
+drv
+.
+£q_ôem_p‹t
+.
+	`c⁄√˘
+(
+sqr
+.
+£q_ôem_exp‹t
+);
+
+37 
+m⁄
+.
+dut_ö_tx_p‹t
+.
+	`c⁄√˘
+(
+cov
+.
+™Æysis_exp‹t
+);
+
+39 
+ídfun˘i⁄
+
+
+40 
+íd˛ass
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_coverage_collector#svh_250_199
+
+1 
+˛ass
+ 
+tx_covîage_cﬁÀ˘‹
+ 
+exãnds
+ 
+	guvm_subs¸ibî
+ #(
+	gtx_ôem
+);
+
+2 `
+	$uvm_comp⁄ít_utûs
+(
+tx_covîage_cﬁÀ˘‹
+)
+
+4 
+tx_ôem
+ 
+tx_h
+;
+
+6 
+covîgroup
+ 
+cg_dut_öputs
+;
+
+7 
+RST
+: 
+covîpoöt
+ 
+tx_h
+.
+ª£t_n
+;
+
+8 
+LOAD
+: 
+covîpoöt
+ 
+tx_h
+.
+lﬂd_í
+;
+
+9 
+DATA
+: 
+covîpoöt
+ 
+tx_h
+.
+d©a
+ {
+
+10 
+bös
+ 
+lo
+ = { [0:127] };
+
+11 
+bös
+ 
+hi
+ = { [128:255] };
+
+12 
+	}
+}
+
+13 
+ídgroup
+
+
+15 
+covîgroup
+ 
+	gcg_dut_ouçuts
+;
+
+16 
+	gRESULT
+: 
+covîpoöt
+ 
+tx_h
+.
+ªsu…
+ {
+
+17 
+bös
+ 
+lo
+ = { [0:127] };
+
+18 
+bös
+ 
+	ghi
+ = { [128:255] };
+
+20 
+ídgroup
+
+
+22 
+fun˘i⁄
+ 
+√w
+(
+°rög
+ 
+«me
+, 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+23 
+	gsu≥r
+.
+√w
+(
+«me
+, 
+∑ª¡
+);
+
+24 
+	gcg_dut_öputs
+ = 
+√w
+();
+
+25 
+	gcg_dut_ouçuts
+ = 
+√w
+();
+
+26 
+ídfun˘i⁄
+
+
+28 
+vútuÆ
+ 
+fun˘i⁄
+ 
+wrôe
+(
+öput
+ 
+tx_ôem
+ 
+t
+);
+
+29 
+	gtx_h
+ = 
+t
+;
+
+30 
+	gcg_dut_öputs
+.
+ßm∂e
+();
+
+31 
+	gcg_dut_ouçuts
+.
+ßm∂e
+();
+
+32 
+ídfun˘i⁄
+
+
+34 
+vútuÆ
+ 
+fun˘i⁄
+ 
+ªp‹t_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+35 `
+uvm_öfo
+("DEBUG", 
+$sf‹m©f
+("Covîagêf‹ cﬁÀ˘‹ %†%6.2f%%", 
+gë_fuŒ_«me
+(), 
+cg_dut_öputs
+.
+gë_covîage
+()), 
+UVM_HIGH
+)
+
+36 
+ídfun˘i⁄
+
+
+37 
+	gíd˛ass
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_driver#svh_251_200
+
+1 
+˛ass
+ 
+tx_drivî
+ 
+exãnds
+ 
+	guvm_drivî
+ #(
+	gtx_ôem
+);
+
+2 `
+	$uvm_comp⁄ít_utûs
+(
+tx_drivî
+)
+
+4 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+, 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+5 
+su≥r
+.
+	`√w
+(
+«me
+, 
+∑ª¡
+);
+
+6 
+ídfun˘i⁄
+
+
+8 
+vútuÆ
+ 
+dut_if
+ 
+vif
+;
+
+10 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`c⁄√˘_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+11 
+vif
+ = 
+sim_c⁄fig_pkg
+::vif;
+
+12 
+ídfun˘i⁄
+
+
+14 
+vútuÆ
+ 
+èsk
+ 
+	`run_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+15 
+tx_ôem
+ 
+tx
+;
+
+17 
+f‹evî
+ 
+begö
+
+
+18 
+£q_ôem_p‹t
+.
+	`gë_√xt_ôem
+(
+tx
+);
+
+19 
+vif
+.
+	`å™s„r
+(
+tx
+);
+
+20 
+£q_ôem_p‹t
+.
+	`ôem_d⁄e
+();
+
+21 
+íd
+
+
+22 
+ídèsk
+
+
+23 
+íd˛ass
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_env#svh_249_198
+
+1 
+˛ass
+ 
+tx_ív
+ 
+exãnds
+ 
+	guvm_ív
+;
+
+2 `
+	$uvm_comp⁄ít_utûs
+(
+tx_ív
+)
+
+4 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+, 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+5 
+su≥r
+.
+	`√w
+(
+«me
+, 
+∑ª¡
+);
+
+6 
+ídfun˘i⁄
+
+
+8 
+tx_sc‹ebﬂrd
+ 
+scb
+;
+
+9 
+tx_agít
+ 
+agt
+;
+
+11 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`buûd_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+13 
+scb
+ = 
+tx_sc‹ebﬂrd
+::
+ty≥_id
+::
+	`¸óã
+("scb", 
+this
+);
+
+15 
+agt
+ = 
+tx_agít
+::
+ty≥_id
+::
+	`¸óã
+("agt", 
+this
+);
+
+16 
+ídfun˘i⁄
+
+
+18 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`c⁄√˘_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+19 
+agt
+.
+dut_ö_tx_p‹t
+.
+	`c⁄√˘
+(
+scb
+.
+dut_ö_exp‹t
+);
+
+20 
+agt
+.
+dut_out_tx_p‹t
+.
+	`c⁄√˘
+(
+scb
+.
+dut_out_exp‹t
+);
+
+21 
+ídfun˘i⁄
+
+
+22 
+íd˛ass
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_evaluator#svh_247_196
+
+1 
+˛ass
+ 
+tx_evÆu©‹
+ 
+exãnds
+ 
+	guvm_comp⁄ít
+;
+
+2 `
+	$uvm_comp⁄ít_utûs
+(
+tx_evÆu©‹
+)
+
+4 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+, 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+5 
+su≥r
+.
+	`√w
+(
+«me
+, 
+∑ª¡
+);
+
+6 
+ídfun˘i⁄
+
+
+8 
+uvm_™Æysis_exp‹t
+ #(
+tx_ôem
+Ë
+ex≥˘ed_exp‹t
+;
+
+9 
+uvm_ém_™Æysis_fifo
+ #(
+tx_ôem
+Ë
+ex≥˘ed_fifo
+;
+
+11 
+uvm_™Æysis_exp‹t
+ #(
+tx_ôem
+Ë
+a˘uÆ_exp‹t
+;
+
+12 
+uvm_ém_™Æysis_fifo
+ #(
+tx_ôem
+Ë
+a˘uÆ_fifo
+;
+
+14 
+m©ch
+, 
+mism©ch
+;
+
+16 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`buûd_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+17 
+ex≥˘ed_fifo
+ = 
+	`√w
+("ex≥˘ed_fifo", 
+this
+);
+
+18 
+ex≥˘ed_exp‹t
+ = 
+	`√w
+("ex≥˘ed_exp‹t", 
+this
+);
+
+19 
+a˘uÆ_fifo
+ = 
+	`√w
+("a˘uÆ_fifo", 
+this
+);
+
+20 
+a˘uÆ_exp‹t
+ = 
+	`√w
+("a˘uÆ_exp‹t", 
+this
+);
+
+21 
+ídfun˘i⁄
+
+
+23 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`c⁄√˘_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+24 
+ex≥˘ed_exp‹t
+.
+	`c⁄√˘
+(
+ex≥˘ed_fifo
+.
+™Æysis_exp‹t
+);
+
+25 
+a˘uÆ_exp‹t
+.
+	`c⁄√˘
+(
+a˘uÆ_fifo
+.
+™Æysis_exp‹t
+);
+
+26 
+ídfun˘i⁄
+
+
+28 
+vútuÆ
+ 
+èsk
+ 
+	`run_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+29 
+tx_ôem
+ 
+ex≥˘ed_ôem
+, 
+a˘uÆ_ôem
+;
+
+31 
+f‹evî
+ 
+begö
+
+
+32 
+ex≥˘ed_fifo
+.
+	`gë
+(
+ex≥˘ed_ôem
+);
+
+33 
+a˘uÆ_fifo
+.
+	`gë
+(
+a˘uÆ_ôem
+);
+
+34 i‡(
+a˘uÆ_ôem
+.
+	$com∑ª
+(
+ex≥˘ed_ôem
+))
+
+35 
+m©ch
+++;
+
+36 
+begö
+
+
+37 `
+	`uvm_îr‹
+(
+	`gë_fuŒ_«me
+(), 
+	`$sf‹m©f
+("%†d€†nŸ m©ch %s", 
+ex≥˘ed_ôem
+.
+	`c⁄vît2°rög
+(), 
+a˘uÆ_ôem
+.
+	$c⁄vît2°rög
+()))
+
+38 
+mism©ch
+++;
+
+39 
+íd
+
+
+40 
+íd
+
+
+41 
+ídèsk
+
+
+42 
+íd˛ass
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_item#svh_260_209
+
+1 
+˛ass
+ 
+tx_ôem
+ 
+exãnds
+ 
+	guvm_£quí˚_ôem
+;
+
+2 `
+	$uvm_obje˘_utûs
+(
+tx_ôem
+)
+
+4 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+="tx_item");
+
+5 
+su≥r
+.
+	`√w
+(
+«me
+);
+
+6 
+ídfun˘i⁄
+
+
+8 
+ønd
+ 
+bô
+ 
+ª£t_n
+;
+
+9 
+ønd
+ 
+bô
+ 
+lﬂd_í
+;
+
+10 
+ønd
+ 
+bô
+ [7:0] 
+d©a
+;
+
+11 
+bô
+ [7:0] 
+ªsu…
+;
+
+13 
+vútuÆ
+ 
+fun˘i⁄
+ 
+°rög
+ 
+	`c⁄vît2°rög
+();
+
+14 
+°rög
+ 
+s
+ = 
+su≥r
+.
+	`c⁄vît2°rög
+();
+
+16 
+	`$sf‹m©
+(
+s
+, "%s\nÅx_item values:", s);
+
+17 
+	`$sf‹m©
+(
+s
+, "%s\¿Ñe£t_n: %x:", s, 
+ª£t_n
+);
+
+18 
+	`$sf‹m©
+(
+s
+, "%s\¿Üﬂd_í: %x:", s, 
+lﬂd_í
+);
+
+19 
+	`$sf‹m©
+(
+s
+, "%s\¿ d©a: %x:", s, 
+d©a
+);
+
+20 
+	`$sf‹m©
+(
+s
+, "%s\¿Ñesu…: %x:", s, 
+ªsu…
+);
+
+22  
+s
+;
+
+23 
+ídfun˘i⁄
+
+
+24 
+íd˛ass
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_monitor#svh_248_197
+
+1 `
+i‚def
+ 
+	g__tx_m⁄ô‹
+
+
+2 `
+deföe
+ 
+__tx_m⁄ô‹
+
+
+4 
+˛ass
+ 
+tx_m⁄ô‹
+ 
+exãnds
+ 
+	guvm_m⁄ô‹
+;
+
+5 `
+	$uvm_comp⁄ít_utûs
+(
+tx_m⁄ô‹
+)
+
+7 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+, 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+8 
+su≥r
+.
+	`√w
+(
+«me
+, 
+∑ª¡
+);
+
+9 
+ídfun˘i⁄
+
+
+11 
+vútuÆ
+ 
+dut_if
+ 
+vif
+;
+
+12 
+uvm_™Æysis_p‹t
+ #(
+tx_ôem
+Ë
+dut_ö_tx_p‹t
+;
+
+13 
+uvm_™Æysis_p‹t
+ #(
+tx_ôem
+Ë
+dut_out_tx_p‹t
+;
+
+15 
+fun˘i⁄
+ 
+	`buûd_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+16 
+dut_ö_tx_p‹t
+ = 
+	`√w
+("dut_ö_tx_p‹t", 
+this
+);
+
+17 
+dut_out_tx_p‹t
+ = 
+	`√w
+("dut_out_tx_p‹t", 
+this
+);
+
+18 
+ídfun˘i⁄
+
+
+20 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`c⁄√˘_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+21 
+vif
+ = 
+sim_c⁄fig_pkg
+::vif;
+
+22 
+ídfun˘i⁄
+
+
+24 
+vútuÆ
+ 
+èsk
+ 
+	`run_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+25 
+f‹k
+
+
+26 
+	`gë_öputs
+();
+
+27 
+	`gë_ouçut
+();
+
+28 
+joö
+
+
+29 
+ídèsk
+
+
+31 
+vútuÆ
+ 
+èsk
+ 
+	`gë_öputs
+();
+
+32 
+tx_ôem
+ 
+tx_ö
+;
+
+33 
+f‹evî
+ 
+begö
+
+
+34 
+tx_ö
+ = 
+tx_ôem
+::
+ty≥_id
+::
+	`¸óã
+("tx_in");
+
+35 
+vif
+.
+	`gë_™_öput
+(
+tx_ö
+);
+
+36 `
+	`uvm_öfo
+("TX_IN", 
+tx_ö
+.
+	`c⁄vît2°rög
+(), 
+UVM_DEBUG
+)
+
+37 
+dut_ö_tx_p‹t
+.
+	`wrôe
+(
+tx_ö
+);
+
+38 
+íd
+
+
+39 
+ídèsk
+
+
+41 
+vútuÆ
+ 
+èsk
+ 
+	`gë_ouçut
+();
+
+42 
+tx_ôem
+ 
+tx_out
+;
+
+43 
+f‹evî
+ 
+begö
+
+
+44 
+tx_out
+ = 
+tx_ôem
+::
+ty≥_id
+::
+	`¸óã
+("tx_out");
+
+45 
+vif
+.
+	`gë_™_ouçut
+(
+tx_out
+);
+
+46 `
+	`uvm_öfo
+("TX_OUT", 
+tx_out
+.
+	`c⁄vît2°rög
+(), 
+UVM_DEBUG
+)
+
+47 
+dut_out_tx_p‹t
+.
+	`wrôe
+(
+tx_out
+);
+
+48 
+íd
+
+
+49 
+ídèsk
+
+
+50 
+íd˛ass
+
+
+52 `
+ídif
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_pkg#sv_255_204
+
+1 
+∑ckage
+ 
+	gtx_pkg
+;
+
+2 
+imp‹t
+ 
+	guvm_pkg
+::*;
+
+3 `
+	gö˛ude
+ "uvm_macros.svh"
+
+5 `
+	gö˛ude
+ "tx_item.svh"
+
+6 `
+	gö˛ude
+ "tx_sequence.svh"
+
+7 `
+	gö˛ude
+ "tx_driver.svh"
+
+8 `
+	gö˛ude
+ "tx_monitor.svh"
+
+9 `
+	gö˛ude
+ "tx_coverage_collector.svh"
+
+10 `
+	gö˛ude
+ "tx_agent.svh"
+
+11 `
+	gö˛ude
+ "tx_predictor.svh"
+
+12 `
+	gö˛ude
+ "tx_evaluator.svh"
+
+13 `
+	gö˛ude
+ "tx_scoreboard.svh"
+
+14 `
+	gö˛ude
+ "tx_env.svh"
+
+15 `
+	gö˛ude
+ "tx_test.svh"
+
+16 
+	gíd∑ckage
+ : 
+tx_pkg
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_predictor#svh_259_208
+
+1 
+˛ass
+ 
+tx_¥edi˘‹
+ 
+exãnds
+ 
+	guvm_subs¸ibî
+ #(
+	gtx_ôem
+);
+
+2 `
+	$uvm_comp⁄ít_utûs
+(
+tx_¥edi˘‹
+)
+
+4 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+, 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+5 
+su≥r
+.
+	`√w
+(
+«me
+, 
+∑ª¡
+);
+
+6 
+ídfun˘i⁄
+
+
+8 
+uvm_™Æysis_p‹t
+ #(
+tx_ôem
+Ë
+ex≥˘ed_p‹t
+;
+
+10 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`buûd_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+11 
+ex≥˘ed_p‹t
+ = 
+	`√w
+("ex≥˘ed_p‹t", 
+this
+);
+
+12 
+ídfun˘i⁄
+
+
+14 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`wrôe
+(
+öput
+ 
+tx_ôem
+ 
+t
+);
+
+15 
+tx_ôem
+ 
+ex≥˘ed_ôem
+;
+
+17 i‡(!
+	`$ˇ°
+(
+ex≥˘ed_ôem
+, 
+t
+.
+	`˛⁄e
+()))
+
+18 `
+	`uvm_Áèl
+(
+	`gë_fuŒ_«me
+(), "ERROR")
+
+20 
+ex≥˘ed_p‹t
+.
+	`wrôe
+(
+ex≥˘ed_ôem
+);
+
+21 
+ídfun˘i⁄
+
+
+22 
+íd˛ass
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_scoreboard#svh_258_207
+
+1 
+˛ass
+ 
+tx_sc‹ebﬂrd
+ 
+exãnds
+ 
+	guvm_sc‹ebﬂrd
+;
+
+2 `
+	$uvm_comp⁄ít_utûs
+(
+tx_sc‹ebﬂrd
+)
+
+4 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+, 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+5 
+su≥r
+.
+	`√w
+(
+«me
+, 
+∑ª¡
+);
+
+6 
+ídfun˘i⁄
+
+
+8 
+tx_¥edi˘‹
+ 
+¥edi˘‹
+;
+
+9 
+tx_evÆu©‹
+ 
+evÆu©‹
+;
+
+11 
+uvm_™Æysis_exp‹t
+ #(
+tx_ôem
+Ë
+dut_ö_exp‹t
+;
+
+12 
+uvm_™Æysis_exp‹t
+ #(
+tx_ôem
+Ë
+dut_out_exp‹t
+;
+
+14 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`buûd_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+15 
+dut_ö_exp‹t
+ = 
+	`√w
+("dut_ö_exp‹t", 
+this
+);
+
+16 
+dut_out_exp‹t
+ = 
+	`√w
+("dut_out_exp‹t", 
+this
+);
+
+17 
+¥edi˘‹
+ = 
+tx_¥edi˘‹
+::
+ty≥_id
+::
+	`¸óã
+("¥edi˘‹", 
+this
+);
+
+18 
+evÆu©‹
+ = 
+tx_evÆu©‹
+::
+ty≥_id
+::
+	`¸óã
+("evÆu©‹", 
+this
+);
+
+19 
+ídfun˘i⁄
+
+
+21 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`c⁄√˘_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+22 
+dut_ö_exp‹t
+.
+	`c⁄√˘
+(
+¥edi˘‹
+.
+™Æysis_exp‹t
+);
+
+23 
+¥edi˘‹
+.
+ex≥˘ed_p‹t
+.
+	`c⁄√˘
+(
+evÆu©‹
+.
+ex≥˘ed_exp‹t
+);
+
+24 
+dut_out_exp‹t
+.
+	`c⁄√˘
+(
+evÆu©‹
+.
+a˘uÆ_exp‹t
+);
+
+25 
+ídfun˘i⁄
+
+
+27 
+íd˛ass
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_sequence#svh_246_195
+
+1 
+˛ass
+ 
+tx_£quí˚
+ 
+exãnds
+ 
+	guvm_£quí˚
+ #(
+	gtx_ôem
+);
+
+2 `
+	$uvm_obje˘_utûs
+(
+tx_£quí˚
+)
+
+4 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+="tx_sequence");
+
+5 
+su≥r
+.
+	`√w
+(
+«me
+);
+
+6 
+ídfun˘i⁄
+
+
+8 
+vútuÆ
+ 
+èsk
+ 
+	`body
+();
+
+9 
+tx_ôem
+ 
+tx
+;
+
+10 
+	$ª≥©
+ (5Ë
+begö
+
+
+11 
+tx
+ = 
+tx_ôem
+::
+ty≥_id
+::
+	`¸óã
+("tx");
+
+12 
+	`°¨t_ôem
+(
+tx
+);
+
+13 i‡(!
+tx
+.
+	`øndomize
+())
+
+14 `
+	`uvm_Áèl
+("TRANSFER", 
+	`$sf‹m©f
+("tx.d©a=%3d", 
+tx
+.
+d©a
+));
+
+15 
+	`föish_ôem
+(
+tx
+);
+
+16 
+íd
+
+
+17 
+ídèsk
+
+
+18 
+íd˛ass
+
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_test#svh_245_194
+
+1 
+˛ass
+ 
+tx_ã°
+ 
+exãnds
+ 
+	guvm_ã°
+;
+
+2 `
+	$uvm_comp⁄ít_utûs
+(
+tx_ã°
+)
+
+4 
+fun˘i⁄
+ 
+	`√w
+(
+°rög
+ 
+«me
+, 
+uvm_comp⁄ít
+ 
+∑ª¡
+);
+
+5 
+su≥r
+.
+	`√w
+(
+«me
+, 
+∑ª¡
+);
+
+6 
+ídfun˘i⁄
+
+
+9 
+tx_ív
+ 
+ív
+;
+
+11 
+vútuÆ
+ 
+fun˘i⁄
+ 
+	`buûd_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+12 
+ív
+ = 
+tx_ív
+::
+ty≥_id
+::
+	`¸óã
+("ív", 
+this
+);
+
+13 
+ídfun˘i⁄
+
+
+16 
+vútuÆ
+ 
+èsk
+ 
+	`run_pha£
+(
+uvm_pha£
+ 
+pha£
+);
+
+17 
+tx_£quí˚
+ 
+£q
+;
+
+18 
+£q
+ = 
+tx_£quí˚
+::
+ty≥_id
+::
+	`¸óã
+("seq");
+
+20 
+pha£
+.
+	`øi£_obje˘i⁄
+(
+this
+, "StartÅx_sequence");
+
+21 
+£q
+.
+	`°¨t
+(
+ív
+.
+agt
+.
+sqr
+);
+
+22 
+pha£
+.
+	`dr›_obje˘i⁄
+(
+this
+, "EndÅx_sequence");
+
+23 
+ídèsk
+
+
+24 
+íd˛ass
+
+
+	@
+1
+.
+0
+17
+2461
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#design#dut#sv_262_210
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#dut_if#sv_257_206
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#sim_config_pkg#sv_256_205
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#sim_configurator#svh_253_202
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#top#sv_254_203
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_agent#svh_252_201
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_coverage_collector#svh_250_199
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_driver#svh_251_200
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_env#svh_249_198
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_evaluator#svh_247_196
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_item#svh_260_209
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_monitor#svh_248_197
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_pkg#sv_255_204
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_predictor#svh_259_208
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_scoreboard#svh_258_207
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_sequence#svh_246_195
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#uvm#lab6#tx_test#svh_245_194

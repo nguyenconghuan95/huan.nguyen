@@ -1,0 +1,73 @@
+cscope 15 /mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/wa/nconghuan/tool/cscope/database/c -q 0000000012 0000000732
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#connectcheck#src#vlog#defines#h_162_124
+
+1 
+	glogic
+ [2:0] {
+IDLE
+,
+	gWSETUP
+,
+	gWACTIVE
+,
+	gRSETUP
+, 
+	gRACTIVE
+} 
+	t¡©e
+;
+
+2 
+	glogic
+ [1:0] {
+INIT
+,
+	gPOP
+,
+	gLOAD
+,
+	gHOLD
+} 
+	t§mp_¡
+;
+
+	@/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#propcheck#src#vlog#defines#h_106_73
+
+1 
+	glogic
+ [2:0] {
+IDLE
+,
+	gWSETUP
+,
+	gWACTIVE
+,
+	gRSETUP
+, 
+	gRACTIVE
+} 
+	t¡©e
+;
+
+2 
+	glogic
+ [1:0] {
+INIT
+,
+	gPOP
+,
+	gLOAD
+,
+	gHOLD
+} 
+	t§mp_¡
+;
+
+	@
+1
+.
+0
+2
+302
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#connectcheck#src#vlog#defines#h_162_124
+/mrvl2g/dc5prengvs01_ns_ssoc_0001/soctool0v/sos_repository/soctool0v_SOS.cac/SOCTOOL_SOS/FILES/training#frontend#propcheck#src#vlog#defines#h_106_73

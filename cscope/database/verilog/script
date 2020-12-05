@@ -1,0 +1,2 @@
+cscope -b -q -k -i xaa -f cscope_xaa.out &
+wait
