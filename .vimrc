@@ -1,13 +1,16 @@
 "*************************************************
 " Highlight                                      "
 "*************************************************
-set tabstop=2
 set expandtab
 set ruler
-set sw=4 
+set sw=2 
 set ts=2
 set mouse=a
+set rnu
 set nu
+set smartindent
+set noswapfile
+set scrolloff=5
 set cuc
 set cul
 set isfname+={,$,}
@@ -365,3 +368,13 @@ set ts=2
 " Source file here
 " ===============================================
 source ~/cscope.vim
+
+call plug#begin('~/.vim/plugged')
+
+" Declare the list of plugins.
+  Plug 'gruvbox-community/gruvbox'
+" Plug 'junegunn/seoul256.vim'
+"
+" " List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
