@@ -6,7 +6,6 @@ set ruler
 set sw=2 
 set ts=2
 set mouse=a
-set rnu
 set nu
 set smartindent
 set noswapfile
@@ -14,6 +13,8 @@ set scrolloff=5
 set cuc
 set cul
 set isfname+={,$,}
+set hlsearch
+set visualbell
 ":hi StatusLine ctermbg=6 ctermfg=2
 "inoremap ( ()<left>
 "inoremap [ []<left>
@@ -286,7 +287,7 @@ hi DiffChange term=underline cterm=bold ctermfg=0 ctermbg=225 guibg=LightGrey
 
           "highlight Search term=reverse ctermbg=14
 
-          highlight Search term=reverse ctermbg=grey
+          highlight Search term=reverse ctermbg=red
 
          " highlight Search term=reverse ctermbg=red
 
@@ -372,9 +373,29 @@ source ~/cscope.vim
 call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
-  Plug 'gruvbox-community/gruvbox'
-" Plug 'junegunn/seoul256.vim'
+  Plug 'davidhalter/jedi-vim'
+  Plug 'drewtempelmeyer/palenight.vim'
+  Plug 'preservim/nerdtree'
 "
 " " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
+colorscheme palenight
 
+" Start NERDTREE when Vim is started without file arguments
+" autocmd VimEnter * NERDTree | wincmd p
+" Open the existing on every tab automatically
+autocmd BufWinEnter * silent NERDTreeMirror
+
+" Exit Vim if NERDTREE is the only window left
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 &&
+  \ exists('b:NERDTree') && b:NERDTree.isTabTree() |
+  \ quit | endif
+
+nnoremap <c-n> :NERDTreeToggle<CR>
+nnoremap tn :tabnew<CR>
+nnoremap tj :tabnext<CR>
+nnoremap tk :tabprev<CR>
+nnoremap td :tabclose<CR>
+
+" Setting for Jedi-vim
+let g:jedi#popup_on_dot = 0
